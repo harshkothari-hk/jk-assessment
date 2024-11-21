@@ -1,7 +1,7 @@
 import * as dotenv from 'dotenv';
 dotenv.config();
 
-export const EnvConfig = {
+export const EnvConfig: any = {
   SERVER: {
     PORT: process.env.PORT,
   },
@@ -10,6 +10,7 @@ export const EnvConfig = {
     USERNAME: process.env.DB_USERNAME,
     PASSWORD: process.env.DB_PASSWORD,
     HOST: process.env.DB_HOST,
-    PORT: process.env.DB_PORT,
+    PORT: Number(process.env.DB_PORT),
+    TYPE: process.env.DB_TYPE || 'mysql'
   },
 };
