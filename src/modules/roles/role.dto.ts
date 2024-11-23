@@ -1,4 +1,5 @@
 import { ApiProperty } from '@nestjs/swagger';
+import { IsOptional, IsString, Matches } from 'class-validator';
 
 export class RoleDTO {
   @ApiProperty()
@@ -12,4 +13,11 @@ export class RoleDTO {
 
   @ApiProperty()
   level: string;
+}
+
+export class RoleFilterDTO {
+  @ApiProperty()
+  @IsOptional()
+  @IsString()
+  name: string;
 }

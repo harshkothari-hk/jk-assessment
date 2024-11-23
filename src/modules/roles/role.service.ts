@@ -1,17 +1,69 @@
-import { Injectable } from '@nestjs/common';
+import { HttpStatus, Injectable } from '@nestjs/common';
 import { Roles } from './role.entity';
 import { Repository } from 'typeorm';
 import { InjectRepository } from '@nestjs/typeorm';
+import { ErrorResponse } from 'src/common/dto';
+import { BaseService } from 'src/common/service';
+import { RequestQuery } from 'src/common/dto/base-service.dto';
+import { RoleFilterDTO } from './role.dto';
+import { paginate } from 'nestjs-typeorm-paginate';
 
 @Injectable()
-export class RolesService {
+export class RolesService extends BaseService {
   constructor(
     @InjectRepository(Roles)
-    private readonly roleRepo: Repository<Roles>
-  ) {}
+    private readonly roleRepo: Repository<Roles>,
+  ) {
+    super();
+  }
 
   public async createRole(payload: Roles) {
     const roleResponse = await this.roleRepo.save(payload);
     return roleResponse;
+  }
+
+  public async updateRole(id: string, payload: Roles) {
+    const getRole = await this.roleRepo.findOne({ where: { id: id } });
+
+    if (!getRole)
+      throw new ErrorResponse(HttpStatus.BAD_REQUEST, 'Invalid role id');
+
+    const roleResponse = await this.roleRepo.update(
+      {
+        id: id,
+      },
+      {
+        ...payload,
+      },
+    );
+    return roleResponse;
+  }
+
+  public async getRoleById(id: string) {
+    return this.roleRepo.findOne({
+      where: {
+        id: id,
+      },
+    });
+  }
+
+  public async getAllRoles(query: RequestQuery<RoleFilterDTO>) {
+    const { filter, pagination, sort } = this.getQuery(query);
+    const rolesQB = this.roleRepo
+      .createQueryBuilder('roles')
+      .select('roles.id')
+      .addSelect('roles.name');
+
+    if (filter.name) {
+      rolesQB.andWhere('roles.name ILIKE :name', {
+        name: `%${filter.name}%`,
+      });
+    }
+
+    if (sort.name) {
+      rolesQB.orderBy('roles.name', sort.name.toUpperCase());
+    }
+
+    return paginate(rolesQB, pagination);
   }
 }

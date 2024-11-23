@@ -11,8 +11,10 @@ async function bootstrap() {
   app.enableShutdownHooks();
 
   const port = process.env.PORT || 3000;
-  await app.listen(port);
-
-  console.log(`Application is running on: http://localhost:${port}`);
+  await app.listen(port).then(() => {
+    console.log(`Application is running on: http://localhost:${port}`);
+  }).catch((error) => {
+    console.error('Error while starting application', error)
+  });
 }
 bootstrap();
