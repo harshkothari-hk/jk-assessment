@@ -10,7 +10,7 @@ const dataSourceOptions: DataSourceOptions = {
     password: process.env.DB_PASSWORD,
     database: process.env.DB_NAME,
     entities: ['dist/modules/*/*.js'],
-    synchronize: false,
+    synchronize: true,
     logging: false,
 };
 
