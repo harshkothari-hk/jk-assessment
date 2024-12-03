@@ -1,0 +1,5 @@
+export const ServiceType = [
+  'DOCUMENT_MANAGEMENT',
+  'USER_MANAGEMENT',
+  'ROLE_PERMISSION_MANAGEMENT',
+];

@@ -7,18 +7,40 @@ import { BaseService } from 'src/common/service';
 import { RequestQuery } from 'src/common/dto/base-service.dto';
 import { RoleFilterDTO } from './role.dto';
 import { paginate } from 'nestjs-typeorm-paginate';
+import { RolePermission } from '../role-permission/rolePermission.entity';
+import { ServiceType } from 'src/common/constants';
 
 @Injectable()
 export class RolesService extends BaseService {
   constructor(
     @InjectRepository(Roles)
     private readonly roleRepo: Repository<Roles>,
+
+    @InjectRepository(RolePermission)
+    private readonly rolePermissionRepo: Repository<RolePermission>,
   ) {
     super();
   }
 
   public async createRole(payload: Roles) {
+    const getRole = await this.roleRepo.find({ where: { code: payload.code } });
+    if (getRole.length > 0)
+      throw new ErrorResponse(HttpStatus.BAD_REQUEST, 'Role with this name already exist');
+
     const roleResponse = await this.roleRepo.save(payload);
+    await Promise.all(
+      ServiceType.map(async (service) => {  
+        const permissionPayload = {
+          serviceType: service,
+          role: roleResponse.id,
+          canRead: false,
+          canWrite: false,
+          canUpdate: false,
+          canDelete: false,
+        };
+        await this.rolePermissionRepo.save(permissionPayload);
+      })
+    )
     return roleResponse;
   }
 

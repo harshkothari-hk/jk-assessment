@@ -6,6 +6,9 @@ import dataSource from './ormconfig';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { RoleModule } from './modules/roles/role.module';
 import { UserModule } from './modules/user/user.module';
+import { DocumentModule } from './modules/documents/document.module';
+import { S3Service } from './common/service';
+import { RolePermissionModule } from './modules/role-permission/rolePermission.module';
 
 @Module({
   imports: [
@@ -13,9 +16,11 @@ import { UserModule } from './modules/user/user.module';
     TypeOrmModule.forRoot({...dataSource, logging: true}),
     RoleModule,
     UserModule,
+    DocumentModule,
+    RolePermissionModule,
   ],
   controllers: [AppController],
-  providers: [AppService],
+  providers: [AppService, S3Service],
 })
 
 export class AppModule implements OnApplicationBootstrap {
