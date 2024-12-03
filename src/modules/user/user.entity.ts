@@ -23,7 +23,7 @@ export class Users {
 
   @Column({
     name: 'isDeleted',
-    type: 'boolean',
+    type: 'boolean', 
     default: false,
   })
   isDeleted: boolean;

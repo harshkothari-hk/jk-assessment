@@ -99,7 +99,7 @@ export class UsersService extends BaseService {
     const { filter, pagination, sort } = this.getQuery(query);
     const usersQB = this.userRepo
       .createQueryBuilder('users')
-      .select('users.id', 'id')
+      .select('users.id')
       .addSelect('users.firstName')
       .addSelect('users.lastName')
       .addSelect('users.contactNumber')
