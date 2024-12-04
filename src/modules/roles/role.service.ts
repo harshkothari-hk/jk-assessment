@@ -2,13 +2,13 @@ import { HttpStatus, Injectable } from '@nestjs/common';
 import { Roles } from './role.entity';
 import { Repository } from 'typeorm';
 import { InjectRepository } from '@nestjs/typeorm';
-import { ErrorResponse } from 'src/common/dto';
-import { BaseService } from 'src/common/service';
+import { ErrorResponse } from '../../common/dto';
+import { BaseService } from '../../common/service';
 import { RequestQuery } from 'src/common/dto/base-service.dto';
 import { RoleFilterDTO } from './role.dto';
 import { paginate } from 'nestjs-typeorm-paginate';
 import { RolePermission } from '../role-permission/rolePermission.entity';
-import { ServiceType } from 'src/common/constants';
+import { ServiceTypeCode } from 'src/common/constants';
 
 @Injectable()
 export class RolesService extends BaseService {
@@ -29,10 +29,10 @@ export class RolesService extends BaseService {
 
     const roleResponse = await this.roleRepo.save(payload);
     await Promise.all(
-      ServiceType.map(async (service) => {  
+      ServiceTypeCode.map(async (service) => {
         const permissionPayload = {
           serviceType: service,
-          role: roleResponse.id,
+          roleId: roleResponse.id,
           canRead: false,
           canWrite: false,
           canUpdate: false,

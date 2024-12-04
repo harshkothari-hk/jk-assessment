@@ -22,6 +22,9 @@ export class RolePermission {
   serviceType: string;
 
   @ManyToOne(() => Roles, { nullable: false, onDelete: 'CASCADE' })
-  @JoinColumn({ name: 'role' })
-  role: string | Roles;
+  @JoinColumn({ name: 'roleId' })
+  role: Roles | string;
+
+  @Column({ name: 'roleId' })
+  roleId: string;
 }
