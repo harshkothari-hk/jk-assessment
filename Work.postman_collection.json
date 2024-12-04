@@ -1,0 +1,322 @@
+{
+	"info": {
+		"_postman_id": "748add51-46d4-41e6-bbd6-5a3515505b8a",
+		"name": "Work",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json",
+		"_exporter_id": "20980460"
+	},
+	"item": [
+		{
+			"name": "Roles",
+			"item": [
+				{
+					"name": "Add Roles",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": {
+								"token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY3OGVlNDAzLWNkYjQtNDBmYy05MWU0LWEwMzNiNWY5ODZjZiIsImZpcnN0TmFtZSI6IkhhcnNoIiwibGFzck5hbWUiOiJLb3RoYXJpIiwicm9sZSI6eyJpZCI6ImM5NmQ0ZDEwLWZhNzgtNDI4ZC04NTdiLThkMTZmNDA4YjkzMCIsIm5hbWUiOiJFZGl0b3IiLCJjb2RlIjoiRURJVE9SIiwibGV2ZWwiOiJBVVRIT1IifSwiaWF0IjoxNzMzMjkyNjAwLCJleHAiOjE3MzMyOTYyMDB9.J0H0h57fia-2NK8FUKOdtrSRXQHQ9sJEm5OF-69h8Ko"
+							}
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"TEST\",\n    \"code\": \"TEST\",\n    \"level\": \"GUEST\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "http://localhost:9001/api/roles"
+					},
+					"response": []
+				},
+				{
+					"name": "Update Role",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"System Admin\",\n    \"code\": \"SYSTEM_ADMIN\",\n    \"level\": \"ROOT\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "http://localhost:9001/api/roles/31ca35f7-7d71-4950-8666-18ddeb7bff83"
+					},
+					"response": []
+				},
+				{
+					"name": "Get by id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": "http://localhost:9001/api/roles/31ca35f7-7d71-4950-8666-18ddeb7bff83"
+					},
+					"response": []
+				},
+				{
+					"name": "Get all roles",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:9001/api/roles?filter={\"name\": \"\"}&sort={\"name\": \"desc\"}&pagination={\"page\": 1, \"limit\": 25}",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "9001",
+							"path": [
+								"api",
+								"roles"
+							],
+							"query": [
+								{
+									"key": "filter",
+									"value": "{\"name\": \"\"}"
+								},
+								{
+									"key": "sort",
+									"value": "{\"name\": \"desc\"}"
+								},
+								{
+									"key": "pagination",
+									"value": "{\"page\": 1, \"limit\": 25}"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Users",
+			"item": [
+				{
+					"name": "Create User",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"firstName\": \"Harsh\",\n    \"lastName\": \"Kothari\",\n    \"email\": \"harsk850@gmail.com\",\n    \"contactNumber\": \"45656565456\",\n    \"role\": \"8452ea3b-8fbf-4a20-99a6-115bcbaf0897\",\n    \"password\": \"Harsh@123\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "http://localhost:9001/api/users"
+					},
+					"response": []
+				},
+				{
+					"name": "Update User",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"firstName\": \"Harshuu\",\n    \"lastName\": \"kothari\",\n    \"contactNumber\": \"3334445432\",\n    \"role\": \"8452ea3b-8fbf-4a20-99a6-115bcbaf0897\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "http://localhost:9001/api/users/b6f86c8a-6a00-434c-9e4c-20069ffe84fb"
+					},
+					"response": []
+				},
+				{
+					"name": "get user by id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": "http://localhost:9001/api/users/b6f86c8a-6a00-434c-9e4c-20069ffe84fb"
+					},
+					"response": []
+				},
+				{
+					"name": "Login",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"email\": \"harsk8590@gmail.com\",\n    \"password\": \"Harsh@123\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "http://localhost:9001/api/users/login"
+					},
+					"response": []
+				},
+				{
+					"name": "Change Password",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"oldPassword\": \"Harsh@124\",\n    \"newPassword\": \"Harsh@123\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "http://localhost:9001/api/users/change-password/b6f86c8a-6a00-434c-9e4c-20069ffe84fb"
+					},
+					"response": []
+				},
+				{
+					"name": "Get all users",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": {
+								"token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY3OGVlNDAzLWNkYjQtNDBmYy05MWU0LWEwMzNiNWY5ODZjZiIsImZpcnN0TmFtZSI6IkhhcnNoIiwibGFzck5hbWUiOiJLb3RoYXJpIiwicm9sZSI6eyJpZCI6ImM5NmQ0ZDEwLWZhNzgtNDI4ZC04NTdiLThkMTZmNDA4YjkzMCIsIm5hbWUiOiJFZGl0b3IiLCJjb2RlIjoiRURJVE9SIiwibGV2ZWwiOiJBVVRIT1IifSwiaWF0IjoxNzMzMjkyNjAwLCJleHAiOjE3MzMyOTYyMDB9.J0H0h57fia-2NK8FUKOdtrSRXQHQ9sJEm5OF-69h8Ko"
+							}
+						},
+						"method": "GET",
+						"header": [],
+						"url": "http://localhost:9001/api/users"
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Documents",
+			"item": [
+				{
+					"name": "add document",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "image",
+									"type": "file",
+									"src": "/Users/harshkothari/Downloads/1687139782466.jpeg"
+								},
+								{
+									"key": "user",
+									"value": "b6f86c8a-6a00-434c-9e4c-20069ffe84fb",
+									"type": "text"
+								},
+								{
+									"key": "documentName",
+									"value": "voterId card",
+									"type": "text"
+								}
+							]
+						},
+						"url": "http://localhost:9001/api/documents"
+					},
+					"response": []
+				},
+				{
+					"name": "Delete document",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": "http://localhost:9001/api/documents/fbbe37c5-bbe8-4f9a-8d01-586a54af9068"
+					},
+					"response": []
+				},
+				{
+					"name": "Get all document",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:9001/api/documents?filter={\"userId\": \"b6f86c8a-6a00-434c-9e4c-20069ffe84fb\"}&sort={\"documentName\": \"desc\"}&pagination={\"page\": 1, \"limit\": 25}",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "9001",
+							"path": [
+								"api",
+								"documents"
+							],
+							"query": [
+								{
+									"key": "filter",
+									"value": "{\"userId\": \"b6f86c8a-6a00-434c-9e4c-20069ffe84fb\"}"
+								},
+								{
+									"key": "sort",
+									"value": "{\"documentName\": \"desc\"}"
+								},
+								{
+									"key": "pagination",
+									"value": "{\"page\": 1, \"limit\": 25}"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Role Permission",
+			"item": [
+				{
+					"name": "Get role permission",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": {
+								"token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY3OGVlNDAzLWNkYjQtNDBmYy05MWU0LWEwMzNiNWY5ODZjZiIsImZpcnN0TmFtZSI6IkhhcnNoIiwibGFzck5hbWUiOiJLb3RoYXJpIiwicm9sZSI6eyJpZCI6ImM5NmQ0ZDEwLWZhNzgtNDI4ZC04NTdiLThkMTZmNDA4YjkzMCIsIm5hbWUiOiJFZGl0b3IiLCJjb2RlIjoiRURJVE9SIiwibGV2ZWwiOiJBVVRIT1IifSwiaWF0IjoxNzMzMjg4NDMwLCJleHAiOjE3MzMyOTIwMzB9.R81fyxGlboCbaF9UNb-SEFGiJKqzZKn9UZ60r7Idnn0"
+							}
+						},
+						"method": "GET",
+						"header": [],
+						"url": "http://localhost:9001/api/role-permission/8452ea3b-8fbf-4a20-99a6-115bcbaf0897"
+					},
+					"response": []
+				},
+				{
+					"name": "Add role permission",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": {
+								"token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY3OGVlNDAzLWNkYjQtNDBmYy05MWU0LWEwMzNiNWY5ODZjZiIsImZpcnN0TmFtZSI6IkhhcnNoIiwibGFzck5hbWUiOiJLb3RoYXJpIiwicm9sZSI6eyJpZCI6ImM5NmQ0ZDEwLWZhNzgtNDI4ZC04NTdiLThkMTZmNDA4YjkzMCIsIm5hbWUiOiJFZGl0b3IiLCJjb2RlIjoiRURJVE9SIiwibGV2ZWwiOiJBVVRIT1IifSwiaWF0IjoxNzMzMjg4NDMwLCJleHAiOjE3MzMyOTIwMzB9.R81fyxGlboCbaF9UNb-SEFGiJKqzZKn9UZ60r7Idnn0"
+							}
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"roleId\": \"c96d4d10-fa78-428d-857b-8d16f408b930\",\n    \"serviceType\": \"DOCUMENT_MANAGEMENT\",\n    \"canRead\": true,\n    \"canWrite\": true,\n    \"canDelete\": true,\n    \"canUpdate\": true\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "http://localhost:9001/api/role-permission"
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
