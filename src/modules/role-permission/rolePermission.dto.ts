@@ -18,7 +18,7 @@ export class RolePermissionDTO {
   serviceType: string;
 
   @ApiProperty()
-  role: string;
+  roleId: string;
 }
 
 export class RolePermissionFilterDTO {

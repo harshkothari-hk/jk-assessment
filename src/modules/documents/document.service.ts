@@ -2,7 +2,7 @@ import { HttpStatus, Injectable } from '@nestjs/common';
 import { Repository } from 'typeorm';
 import { InjectRepository } from '@nestjs/typeorm';
 import { ErrorResponse } from 'src/common/dto';
-import { BaseService, S3Service } from 'src/common/service';
+import { BaseService, S3Service } from '../../common/service';
 import { RequestQuery } from 'src/common/dto/base-service.dto';
 import { paginate } from 'nestjs-typeorm-paginate';
 import { Documents } from './document.entity';
