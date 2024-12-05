@@ -1,99 +1,129 @@
-<p align="center">
-  <a href="http://nestjs.com/" target="blank"><img src="https://nestjs.com/img/logo-small.svg" width="120" alt="Nest Logo" /></a>
-</p>
+# **NestJS Role-Based Authorization API with Upload Document**
 
-[circleci-image]: https://img.shields.io/circleci/build/github/nestjs/nest/master?token=abc123def456
-[circleci-url]: https://circleci.com/gh/nestjs/nest
+A scalable and secure API built with NestJS, implementing role-based access control (RBAC), authentication, and authorization. It uses TypeORM for database management, JWT for authentication, and supports integration with AWS S3 for file storage.
 
-  <p align="center">A progressive <a href="http://nodejs.org" target="_blank">Node.js</a> framework for building efficient and scalable server-side applications.</p>
-    <p align="center">
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/v/@nestjs/core.svg" alt="NPM Version" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/l/@nestjs/core.svg" alt="Package License" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/dm/@nestjs/common.svg" alt="NPM Downloads" /></a>
-<a href="https://circleci.com/gh/nestjs/nest" target="_blank"><img src="https://img.shields.io/circleci/build/github/nestjs/nest/master" alt="CircleCI" /></a>
-<a href="https://coveralls.io/github/nestjs/nest?branch=master" target="_blank"><img src="https://coveralls.io/repos/github/nestjs/nest/badge.svg?branch=master#9" alt="Coverage" /></a>
-<a href="https://discord.gg/G7Qnnhy" target="_blank"><img src="https://img.shields.io/badge/discord-online-brightgreen.svg" alt="Discord"/></a>
-<a href="https://opencollective.com/nest#backer" target="_blank"><img src="https://opencollective.com/nest/backers/badge.svg" alt="Backers on Open Collective" /></a>
-<a href="https://opencollective.com/nest#sponsor" target="_blank"><img src="https://opencollective.com/nest/sponsors/badge.svg" alt="Sponsors on Open Collective" /></a>
-  <a href="https://paypal.me/kamilmysliwiec" target="_blank"><img src="https://img.shields.io/badge/Donate-PayPal-ff3f59.svg" alt="Donate us"/></a>
-    <a href="https://opencollective.com/nest#sponsor"  target="_blank"><img src="https://img.shields.io/badge/Support%20us-Open%20Collective-41B883.svg" alt="Support us"></a>
-  <a href="https://twitter.com/nestframework" target="_blank"><img src="https://img.shields.io/twitter/follow/nestframework.svg?style=social&label=Follow" alt="Follow us on Twitter"></a>
-</p>
-  <!--[![Backers on Open Collective](https://opencollective.com/nest/backers/badge.svg)](https://opencollective.com/nest#backer)
-  [![Sponsors on Open Collective](https://opencollective.com/nest/sponsors/badge.svg)](https://opencollective.com/nest#sponsor)-->
+---
 
-## Description
+## **Table of Contents**
+1. [Features](#features)
+2. [Technologies Used](#technologies-used)
+3. [Setup and Installation](#setup-and-installation)
+4. [Environment Variables](#environment-variables)
+5. [Endpoints](#endpoints)
+6. [Usage](#usage)
 
-[Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
+---
 
-## Project setup
+## **Features**
+- **Authentication & Authorization:**
+  - JWT-based user authentication.
+  - Role-based access control (RBAC) with roles like Admin, Editor, Viewer.
+- **User Management:**
+  - Create, update, fetch, and delete users.
+  - Password encryption with `bcrypt`.
+- **Role Management:**
+  - Role and permission handling.
+- **AWS S3 Integration:**
+  - File upload and management.
+- **TypeORM Support:**
+  - Seamless database integration with migrations.
+- **Swagger API Documentation:**
+  - Interactive API documentation with `@nestjs/swagger`.
 
-```bash
-$ npm install
-```
+---
 
-## Compile and run the project
+## **Technologies Used**
+- **Framework:** [NestJS](https://nestjs.com/)
+- **Database:** PostgreSQL with [TypeORM](https://typeorm.io/)
+- **Authentication:** JWT
+- **File Storage:** AWS S3
+- **Validation:** [class-validator](https://github.com/typestack/class-validator)
+- **API Documentation:** Swagger
+- **Middleware:** Custom Guards and Interceptors
 
-```bash
-# development
-$ npm run start
+---
 
-# watch mode
-$ npm run start:dev
+## **Setup and Installation**
 
-# production mode
-$ npm run start:prod
-```
+### **Prerequisites**
+1. Node.js (>=16.x)
+2. PostgreSQL
+3. AWS account (for S3 integration)
 
-## Run tests
+### **Installation**
+1. Clone the repository:
+   ```bash
+   git clone https://github.com/your-username/your-repo-name.git
+   cd your-repo-name
+2. Install dependencies:
+   ```bash
+   npm install
+3. Start the server:
+    ```bash
+    npm run start:dev
 
-```bash
-# unit tests
-$ npm run test
+## **Environment Variables**
+    #server
+    PORT=9001
+    
+    #DB
+    DB_HOST=localhost
+    DB_PORT=5432
+    DB_USERNAME=postgres
+    DB_PASSWORD=root
+    DB_NAME=jk-assessment
+    
+    #jwt
+    SALT=10
+    SECRET_KEY=***
+    JWT_EXPIRYIN=60m
+    
+    #aws
+    AWS_REGION=ap-south-1
+    AWS_ACCESS_KEY=***
+    AWS_SECRET_ACCESS_KEY=***
+    AWS_BUCKET=jk-assessment
+    
 
-# e2e tests
-$ npm run test:e2e
+## **API Endpoints**
 
-# test coverage
-$ npm run test:cov
-```
+### Users
+| **Method** | **Endpoint**       | **Description**              |
+|------------|--------------------|------------------------------|
+| POST       | `/users`           | Register a new user          |
+| PUT        | `/users/:id`       | Update User                  |
+| GET        | `/users`           | Get all users                |
+| GET        | `/users/:id`       | Get user by ID               |
+| POST       | `/users/login`     | User Login                   |
+| PUT        | `/users/change-password/:id` | Password Update     |
 
-## Deployment
+### Roles
+| **Method** | **Endpoint**       | **Description**              |
+|------------|--------------------|------------------------------|
+| POST       | `/roles`           | Create a new role            |
+| GET        | `/roles/:id`       | Get role by ID               |
+| GET        | `/roles`           | Get all roles                |
+| PUT        | `/roles/:id`       | Update Role                  |
 
-When you're ready to deploy your NestJS application to production, there are some key steps you can take to ensure it runs as efficiently as possible. Check out the [deployment documentation](https://docs.nestjs.com/deployment) for more information.
+### Role Permission
+| **Method** | **Endpoint**       | **Description**              |
+|------------|--------------------|------------------------------|
+| POST       | `/role-permission` | Add Permission               |
+| GET        | `/role-permission/:roleId`| Get role permission by ID     |
 
-If you are looking for a cloud-based platform to deploy your NestJS application, check out [Mau](https://mau.nestjs.com), our official platform for deploying NestJS applications on AWS. Mau makes deployment straightforward and fast, requiring just a few simple steps:
+### Documents
+| **Method** | **Endpoint**       | **Description**              |
+|------------|--------------------|------------------------------|
+| POST       | `/documents`       | Add new Document             |
+| GET        | `/documents`       | Get all Documents            |
+| DELETE     | `/documents/:id`   | Delete Document by id        |
 
-```bash
-$ npm install -g mau
-$ mau deploy
-```
+### Notes:
+- Replace `:id` with the specific resource ID you want to access.
+- Ensure that authentication tokens are provided in the request headers where required.
 
-With Mau, you can deploy your application in just a few clicks, allowing you to focus on building features rather than managing infrastructure.
-
-## Resources
-
-Check out a few resources that may come in handy when working with NestJS:
-
-- Visit the [NestJS Documentation](https://docs.nestjs.com) to learn more about the framework.
-- For questions and support, please visit our [Discord channel](https://discord.gg/G7Qnnhy).
-- To dive deeper and get more hands-on experience, check out our official video [courses](https://courses.nestjs.com/).
-- Deploy your application to AWS with the help of [NestJS Mau](https://mau.nestjs.com) in just a few clicks.
-- Visualize your application graph and interact with the NestJS application in real-time using [NestJS Devtools](https://devtools.nestjs.com).
-- Need help with your project (part-time to full-time)? Check out our official [enterprise support](https://enterprise.nestjs.com).
-- To stay in the loop and get updates, follow us on [X](https://x.com/nestframework) and [LinkedIn](https://linkedin.com/company/nestjs).
-- Looking for a job, or have a job to offer? Check out our official [Jobs board](https://jobs.nestjs.com).
-
-## Support
-
-Nest is an MIT-licensed open source project. It can grow thanks to the sponsors and support by the amazing backers. If you'd like to join them, please [read more here](https://docs.nestjs.com/support).
-
-## Stay in touch
-
-- Author - [Kamil Myśliwiec](https://twitter.com/kammysliwiec)
-- Website - [https://nestjs.com](https://nestjs.com/)
-- Twitter - [@nestframework](https://twitter.com/nestframework)
-
-## License
-
-Nest is [MIT licensed](https://github.com/nestjs/nest/blob/master/LICENSE).
+## **Usage**
+1. **Swagger Documentation**: After starting the server, access the Swagger UI at:
+    ```
+    http://localhost:9001/api/swagger
+2. **File Uploads:** Configure AWS S3 credentials in `.env` and integrate the provided S3 service to handle file uploads.
