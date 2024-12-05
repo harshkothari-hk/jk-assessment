@@ -85,7 +85,7 @@ A scalable and secure API built with NestJS, implementing role-based access cont
     AWS_BUCKET=jk-assessment
     
 
-## **API Endpoints**
+## **Endpoints**
 
 ### Users
 | **Method** | **Endpoint**       | **Description**              |
